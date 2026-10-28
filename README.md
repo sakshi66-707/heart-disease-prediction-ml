@@ -110,6 +110,8 @@ The model correctly identified 27 of the 33 heart disease cases but missed 6. Re
 
 These results are based on a small test set and should not be interpreted as evidence of clinical reliability.
 
+![Improved KNN Confusion Matrix](knn_confusion_matrix.png)
+
 
 ### Nested Cross-Validation
 
