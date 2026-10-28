@@ -72,6 +72,22 @@ Results from the 80/20 train-test split:
 Improved KNN achieved the highest accuracy on this particular test split.
 
 
+### Five-Model Classification Metrics Comparison
+
+The following metrics were calculated on the same held-out test set of 61 records. Precision, recall, and F1-score refer to the positive class (heart disease).
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+|---|---:|---:|---:|---:|
+| Logistic Regression | 80.33% | 80.00% | 84.85% | 82.35% |
+| Gaussian Naive Bayes | 78.69% | 83.33% | 75.76% | 79.37% |
+| KNN (K=12) | 80.33% | 80.00% | 84.85% | 82.35% |
+| Random Forest | 77.05% | 78.79% | 78.79% | 78.79% |
+| **Improved KNN (Tuned)** | **83.61%** | **87.10%** | 81.82% | **84.38%** |
+
+Improved KNN achieved the highest accuracy, precision, and F1-score on this test split. Logistic Regression and baseline KNN achieved the highest recall (84.85%), illustrating the trade-off between precision and recall.
+
+These results are exploratory and should be interpreted cautiously because the test set contains only 61 records.
+
 ### Five-Fold Cross-Validation Comparison
 
 To compare the five model configurations more consistently, stratified five-fold cross-validation was performed on the training dataset using the same outer folds for all models. Hyperparameter tuning for improved KNN was performed within each training fold.
