@@ -53,7 +53,9 @@ The project follows these steps:
 4. Apply preprocessing within machine learning pipelines.
 5. Train and evaluate baseline classification models.
 6. Improve KNN using numerical feature scaling, categorical feature encoding, and GridSearchCV.
-7. Evaluate the improved KNN approach using nested five-fold cross-validation.
+7. Compare all five model configurations using stratified five-fold cross-validation on the training set.
+8. Perform a separate nested five-fold cross-validation experiment for improved KNN using the full cleaned dataset.
+
 
 ## Model Performance
 
@@ -96,7 +98,7 @@ The improved KNN model was evaluated on the held-out test set of 61 records.
 | Test Accuracy | 83.61% |
 | Precision (Heart Disease) | 87.10% |
 | Recall (Heart Disease) | 81.82% |
-| F1-Score (Heart Disease) | 84.40% |
+| F1-Score (Heart Disease) | 84.38% |
 
 **Confusion Matrix Results:**
 - True Negatives: 24
@@ -111,10 +113,14 @@ These results are based on a small test set and should not be interpreted as evi
 
 ### Nested Cross-Validation
 
-To obtain a more robust performance estimate, nested five-fold cross-validation was performed for the improved KNN approach.
+As a separate exploratory experiment, nested five-fold cross-validation was performed on the full cleaned dataset to evaluate the improved KNN approach with hyperparameter tuning performed within each outer training fold.
 
 - Mean accuracy: **80.78%**
 - Standard deviation: **5.37 percentage points**
+
+**Why the cross-validation results differ:** The five-model comparison used the 241-record training set, with three-fold inner hyperparameter tuning for improved KNN. The separate nested cross-validation experiment used all 302 cleaned records, with five-fold inner tuning and a different outer-fold split. Consequently, the reported mean accuracies are not directly comparable.
+
+The nested experiment included records from the original held-out test set, so it should be interpreted as a separate exploratory evaluation rather than an independent validation of the selected model.
 
 The difference between test accuracy and cross-validation accuracy illustrates how model performance can vary across data splits.
 
