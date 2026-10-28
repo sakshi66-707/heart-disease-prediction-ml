@@ -1,3 +1,6 @@
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sakshi66-707/heart-disease-prediction-ml/blob/main/Heart_Disease_Prediction_GitHub.ipynb)
+
 # Heart Disease Prediction Using Machine Learning
 
 ## Project Overview
@@ -66,6 +69,46 @@ Results from the 80/20 train-test split:
 
 Improved KNN achieved the highest accuracy on this particular test split.
 
+
+### Five-Fold Cross-Validation Comparison
+
+To compare the five model configurations more consistently, stratified five-fold cross-validation was performed on the training dataset using the same outer folds for all models. Hyperparameter tuning for improved KNN was performed within each training fold.
+
+| Model | Mean CV Accuracy ± Std Dev |
+|---|---|
+| Logistic Regression | 83.79% ± 8.61 pp |
+| Gaussian Naive Bayes | 81.72% ± 4.89 pp |
+| KNN (K=12) | 80.88% ± 4.90 pp |
+| **Random Forest** | **85.88% ± 6.12 pp** |
+| Improved KNN (Tuned) | 83.79% ± 4.88 pp |
+
+Random Forest achieved the highest mean cross-validation accuracy. However, the differences between models were modest relative to the variability across folds, so these results do not establish that one model is definitively superior.
+
+*Note: pp = percentage points. Cross-validation was performed on the training dataset, keeping the held-out test set separate.*
+
+
+### Improved KNN - Classification Report and Confusion Matrix
+
+The improved KNN model was evaluated on the held-out test set of 61 records.
+
+| Metric | Result |
+|---|---|
+| Test Accuracy | 83.61% |
+| Precision (Heart Disease) | 87.10% |
+| Recall (Heart Disease) | 81.82% |
+| F1-Score (Heart Disease) | 84.40% |
+
+**Confusion Matrix Results:**
+- True Negatives: 24
+- False Positives: 4
+- False Negatives: 6
+- True Positives: 27
+
+The model correctly identified 27 of the 33 heart disease cases but missed 6. Recall is particularly important in this task because false negatives represent positive cases incorrectly classified as negative.
+
+These results are based on a small test set and should not be interpreted as evidence of clinical reliability.
+
+
 ### Nested Cross-Validation
 
 To obtain a more robust performance estimate, nested five-fold cross-validation was performed for the improved KNN approach.
@@ -89,20 +132,23 @@ Compared with the undergraduate version, this project introduces:
 
 These improvements strengthen the evaluation methodology, although they do not guarantee higher predictive accuracy.
 
+
 ## Key Findings
 
-- Data quality and leakage prevention are important for reliable model evaluation.
-- Improved KNN achieved the highest observed accuracy on the selected test split.
-- Random Forest did not outperform KNN in the baseline experiment.
-- Cross-validation revealed variation in performance across different subsets of the data.
-- Higher accuracy on one test split does not necessarily indicate better generalization.
+- Removing duplicate records reduced the dataset from 1,025 to 302 unique observations.
+- Improved KNN achieved the highest accuracy (83.61%) on the held-out test split.
+- Improved KNN achieved 81.82% recall for heart disease cases, correctly identifying 27 of 33 positive cases.
+- Random Forest achieved the highest mean accuracy (85.88%) in the five-model cross-validation comparison.
+- The differences between cross-validation results were modest relative to their variability, so no model can be considered definitively superior.
+- Performance on a single test split does not necessarily reflect generalization to new data.
 
 ## Limitations
 
 - The cleaned dataset contains only 302 unique records.
-- The test set contains 61 records, making its accuracy estimate sensitive to individual predictions.
-- Nested cross-validation was performed for improved KNN, not for every algorithm.
-- The dataset is intended for educational experimentation and does not establish clinical validity.
+- The held-out test set contains 61 records, making performance estimates sensitive to individual predictions.
+- All five model configurations were compared using five-fold cross-validation, but nested hyperparameter tuning was performed only for improved KNN.
+- Multiple models were explored using the same test set, so the highest test accuracy should be interpreted as exploratory.
+- The dataset and models are intended for educational research and are not validated for clinical decision-making.
 
 ## How to Run
 
@@ -112,6 +158,20 @@ These improvements strengthen the evaluation methodology, although they do not g
 4. Run the remaining cells in order.
 
 The notebook contains the preprocessing, model training, evaluation, and cross-validation workflow.
+
+
+### Dependencies
+
+The Python libraries and their tested versions are listed in `requirements.txt`.
+
+To install the dependencies in a local Python environment, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+Alternatively, click the **Open in Colab** badge at the top of this README to open the notebook in Google Colab. Download the dataset from Kaggle and upload `archive.zip` when prompted.
+
 
 ## Future Improvements
 
